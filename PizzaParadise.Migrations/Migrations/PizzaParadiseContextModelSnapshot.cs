@@ -30,6 +30,10 @@ namespace PizzaParadise.Blazor.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnName("ACTIVE");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(255)

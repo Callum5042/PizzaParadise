@@ -20,6 +20,8 @@ namespace PizzaParadise.Entities.Models
 
         public decimal Price { get; set; }
 
+        public bool Active { get; set; }
+
         protected class PizzaConfiguration : IEntityTypeConfiguration<Pizza>
         {
             public void Configure(EntityTypeBuilder<Pizza> builder)
@@ -38,6 +40,8 @@ namespace PizzaParadise.Entities.Models
                 builder.Property(x => x.Price)
                     .HasColumnName("PRICE")
                     .HasPrecision(19, 4);
+                builder.Property(x => x.Active)
+                    .HasColumnName("ACTIVE");
             }
         }
     }
