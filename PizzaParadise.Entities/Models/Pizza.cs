@@ -30,6 +30,7 @@ namespace PizzaParadise.Entities.Models
                     .HasColumnName("BOSS_ID");
                 builder.Property(x => x.Name)
                     .HasColumnName("NAME")
+                    .IsUnicode(false)
                     .HasMaxLength(50);
                 builder.Property(x => x.Description)
                     .HasColumnName("DESCRIPTION")

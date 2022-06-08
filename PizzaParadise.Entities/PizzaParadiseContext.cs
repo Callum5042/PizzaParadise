@@ -9,6 +9,11 @@ namespace PizzaParadise.Entities
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PizzaParadiseContext).Assembly);
+        }
+
         public DbSet<Pizza> Pizzas => Set<Pizza>();
     }
 }

@@ -15,7 +15,10 @@ namespace Company.WebApplication1
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
-            builder.Services.AddDbContextFactory<PizzaParadiseContext>(opt => opt.UseSqlServer(connectionString));
+            builder.Services.AddDbContextFactory<PizzaParadiseContext>(opt => 
+            {
+                opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("PizzaParadise.Blazor"));
+            });
 
             var app = builder.Build();
 
