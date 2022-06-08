@@ -1,0 +1,11 @@
+﻿@page "/pizza"
+
+<h3>Pizza</h3>
+
+<input type="text" @bind-value=Firstname />
+<span>Hello, @Firstname</span>
+
+@code {
+    public string? Firstname { get; set; } = "Mr no name";
+
+}

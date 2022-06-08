@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaParadise.Entities;
 
@@ -10,9 +11,10 @@ using PizzaParadise.Entities;
 namespace PizzaParadise.Blazor.Migrations
 {
     [DbContext(typeof(PizzaParadiseContext))]
-    partial class PizzaParadiseContextModelSnapshot : ModelSnapshot
+    [Migration("20220608211221_UserTable")]
+    partial class UserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
