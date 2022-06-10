@@ -1,0 +1,30 @@
+version: '3.4'
+
+networks:
+    localdev:
+        name: localdev
+
+services:
+    pizzaparadise.blazor:
+        image: ${DOCKER_REGISTRY-}pizzaparadiseblazor
+        build:
+            context: .
+            dockerfile: PizzaParadise/Dockerfile
+        ports:
+            - "7000:80"
+        depends_on:
+            - dbserver
+        networks:
+            - localdev
+
+    dbserver:
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        container_name: dbserver
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=Nick1234
+            - MSSQL_TCP_PORT=1433
+        ports:
+            - "1433:1433"
+        networks:
+            - localdev

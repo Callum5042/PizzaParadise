@@ -1,4 +1,7 @@
+using Mapster;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
+using PizzaParadise.Blazor.Data;
 using PizzaParadise.Data;
 using PizzaParadise.Entities;
 
@@ -19,6 +22,10 @@ namespace Company.WebApplication1
             {
                 opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("PizzaParadise.Migrations"));
             });
+
+            builder.Services.AddSingleton(new TypeAdapterConfig());
+            builder.Services.AddScoped<IMapper, ServiceMapper>();
+            builder.Services.AddTransient<UserHandler>();
 
             var app = builder.Build();
 

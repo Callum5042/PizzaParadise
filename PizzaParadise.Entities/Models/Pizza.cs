@@ -12,11 +12,16 @@ namespace PizzaParadise.Entities.Models
             Price = price;
         }
 
+        public Pizza()
+        {
+
+        }
+
         public int Id { get; protected set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public decimal Price { get; set; }
 
