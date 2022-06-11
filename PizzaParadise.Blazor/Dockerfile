@@ -8,13 +8,13 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["PizzaParadise/PizzaParadise.csproj", "PizzaParadise/"]
-RUN dotnet restore "PizzaParadise/PizzaParadise.csproj"
+RUN dotnet restore "PizzaParadise.Blazor/PizzaParadise.Blazor.csproj"
 COPY . .
 WORKDIR "/src/PizzaParadise"
-RUN dotnet build "PizzaParadise.csproj" -c Release -o /app/build
+RUN dotnet build "PizzaParadise.Blazor.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "PizzaParadise.csproj" -c Release -o /app/publish
+RUN dotnet publish "PizzaParadise.Blazor.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

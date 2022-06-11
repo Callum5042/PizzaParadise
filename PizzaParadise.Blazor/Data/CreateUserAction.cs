@@ -1,23 +1,31 @@
-﻿using Mapster;
-using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using MapsterMapper;
 using PizzaParadise.Entities;
 using PizzaParadise.Entities.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PizzaParadise.Blazor.Data
 {
-    public class UserHandler
+    public class UserModel
+    {
+        [Required]
+        public string? FirstName { get; set; }
+
+        [Required]
+        public string? LastName { get; set; }
+    }
+
+    public class CreateUserAction
     {
         private readonly PizzaParadiseContext _context;
         private readonly IMapper _mapper;
 
-        public UserHandler(PizzaParadiseContext context, IMapper mapper)
+        public CreateUserAction(PizzaParadiseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async ValueTask Test()
+        public async ValueTask ExecuteAsync(UserModel model)
         {
             //var result = await _mapper.From(_context.Users).ProjectToType<UserDto>().FirstOrDefaultAsync();
 
@@ -32,22 +40,12 @@ namespace PizzaParadise.Blazor.Data
 
             var user = new User()
             {
-                FirstName = "Callum",
-                LastName = "Anning"
+                FirstName = model.FirstName,
+                LastName = model.LastName
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
-    }
-
-    public class UserDto
-    {
-        public UserDto()
-        {
-
-        }
-
-        public string? FirstName { get; set; }
     }
 }

@@ -18,14 +18,14 @@ namespace Company.WebApplication1
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
-            builder.Services.AddDbContextFactory<PizzaParadiseContext>(opt => 
+            builder.Services.AddDbContextFactory<PizzaParadiseContext>(opt =>
             {
                 opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("PizzaParadise.Migrations"));
             });
 
             builder.Services.AddSingleton(new TypeAdapterConfig());
             builder.Services.AddScoped<IMapper, ServiceMapper>();
-            builder.Services.AddTransient<UserHandler>();
+            builder.Services.AddTransient<CreateUserAction>();
 
             var app = builder.Build();
 
@@ -45,6 +45,13 @@ namespace Company.WebApplication1
 
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
+
+            // Apply migrations
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<PizzaParadiseContext>();
+                context.Database.Migrate();
+            }
 
             app.Run();
         }

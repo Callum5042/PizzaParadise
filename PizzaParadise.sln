@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Blazor", "PizzaParadise\PizzaParadise.Blazor.csproj", "{BE75DCDE-92EB-439C-A657-66DBD360B7DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Blazor", "PizzaParadise.Blazor\PizzaParadise.Blazor.csproj", "{BE75DCDE-92EB-439C-A657-66DBD360B7DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Entities", "PizzaParadise.Entities\PizzaParadise.Entities.csproj", "{DEB62F49-CA47-47F0-934B-67D739906132}"
 EndProject

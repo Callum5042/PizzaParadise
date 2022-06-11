@@ -1,0 +1,41 @@
+﻿@page "/user"
+@inject PizzaParadise.Entities.PizzaParadiseContext DbContext
+@inject PizzaParadise.Blazor.Data.CreateUserAction CreateUserAction
+@using PizzaParadise
+@using PizzaParadise.Blazor.Data
+@using Microsoft.EntityFrameworkCore;
+
+<h1>User</h1>
+
+<EditForm Model="@UserModel" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="row">
+
+        <div class="col-md-6 form-group">
+            <label>First Name</label>
+            <InputText @bind-Value="UserModel.FirstName" class="form-control" />
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label>Last Name</label>
+            <InputText @bind-Value="UserModel.LastName" class="form-control" />
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</EditForm>
+
+@code 
+{
+    private UserModel UserModel { set; get; } = new UserModel();
+
+    private async Task HandleValidSubmit()
+    {
+        await CreateUserAction.ExecuteAsync(UserModel);
+    }
+}

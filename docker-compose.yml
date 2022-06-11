@@ -9,7 +9,7 @@ services:
         image: ${DOCKER_REGISTRY-}pizzaparadiseblazor
         build:
             context: .
-            dockerfile: PizzaParadise/Dockerfile
+            dockerfile: PizzaParadise.Blazor/Dockerfile
         ports:
             - "7000:80"
         depends_on:
