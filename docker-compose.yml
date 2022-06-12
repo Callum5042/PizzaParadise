@@ -30,3 +30,16 @@ services:
             - localdev
         volumes:
             - ./dbserver:/var/lib/sql/data
+
+    seq:
+        image: datalust/seq:latest
+        container_name: seq
+        environment:
+            - ACCEPT_EULA=Y
+        ports:
+            - "5000:80"
+            - "5341:5341"
+        networks:
+            - localdev
+        volumes:
+            - ./seq:/var/lib/seq/data

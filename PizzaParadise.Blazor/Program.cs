@@ -22,6 +22,7 @@ namespace Company.WebApplication1
                 .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", LogEventLevel.Warning)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
+                .WriteTo.Seq("http://host.docker.internal:5341")
                 .CreateLogger();
 
             builder.Host.UseSerilog();
