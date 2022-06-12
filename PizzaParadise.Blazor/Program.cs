@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using PizzaParadise.Blazor.Data;
 using PizzaParadise.Data;
 using PizzaParadise.Entities;
+using Serilog;
+using Serilog.Events;
 
 namespace Company.WebApplication1
 {
@@ -13,6 +15,16 @@ namespace Company.WebApplication1
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("PizzaParadiseDb");
+
+            // Setup logging
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", LogEventLevel.Warning)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+
+            builder.Host.UseSerilog();
 
             // Add services to the container.
             builder.Services.AddRazorPages();
@@ -26,6 +38,7 @@ namespace Company.WebApplication1
             builder.Services.AddSingleton(new TypeAdapterConfig());
             builder.Services.AddScoped<IMapper, ServiceMapper>();
             builder.Services.AddTransient<CreateUserAction>();
+            builder.Services.AddTransient<ListUserAction>();
 
             var app = builder.Build();
 

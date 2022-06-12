@@ -1,6 +1,7 @@
 ﻿@page "/user"
 @inject PizzaParadise.Entities.PizzaParadiseContext DbContext
 @inject PizzaParadise.Blazor.Data.CreateUserAction CreateUserAction
+@inject PizzaParadise.Blazor.Data.ListUserAction ListUserAction
 @using PizzaParadise
 @using PizzaParadise.Blazor.Data
 @using Microsoft.EntityFrameworkCore;
@@ -30,12 +31,25 @@
 
 </EditForm>
 
-@code 
+<ul>
+    @foreach (var user in users)
+    {
+        <li>@user.FirstName @user.LastName</li>
+    }
+</ul>
+
+@code
 {
+    private IReadOnlyList<UserModelList> users = new List<UserModelList>();
     private UserModel UserModel { set; get; } = new UserModel();
 
     private async Task HandleValidSubmit()
     {
         await CreateUserAction.ExecuteAsync(UserModel);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await ListUserAction.ExecuteAsync();
     }
 }
