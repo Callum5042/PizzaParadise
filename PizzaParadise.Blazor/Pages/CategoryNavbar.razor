@@ -1,0 +1,23 @@
+﻿
+<ul class="list-group">
+    @foreach (var category in categories)
+    {
+        <NavLink href=@($"/order/{category.ToLower()}") class="list-group-item">@category</NavLink>
+    }
+</ul>
+
+@code {
+    private IEnumerable<string> categories = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        categories = new List<string>()
+        {
+            "Starters",
+            "Pizzas",
+            "Sides",
+            "Desserts",
+            "Drinks",
+        };
+    }
+}

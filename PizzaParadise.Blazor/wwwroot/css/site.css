@@ -62,3 +62,19 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.test-container {
+    border: 1px solid black;
+}
+
+.categories-container {
+    min-width: 200px;
+}
+
+.sticky {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start; /* <-- this is the fix */
+}

@@ -7,7 +7,7 @@ using PizzaParadise.Entities;
 using Serilog;
 using Serilog.Events;
 
-namespace Company.WebApplication1
+namespace PizzaParadise.Blazor
 {
     public class Program
     {
@@ -26,9 +26,10 @@ namespace Company.WebApplication1
                 config.WriteTo.Seq("http://host.docker.internal:5001");
             });
 
-            // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
+
+            // Add services to the container.
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddDbContextFactory<PizzaParadiseContext>(opt =>
             {
