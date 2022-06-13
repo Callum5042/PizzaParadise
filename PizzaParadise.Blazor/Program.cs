@@ -17,15 +17,14 @@ namespace Company.WebApplication1
             var connectionString = builder.Configuration.GetConnectionString("PizzaParadiseDb");
 
             // Setup logging
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", LogEventLevel.Warning)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .WriteTo.Seq("http://host.docker.internal:5341")
-                .CreateLogger();
-
-            builder.Host.UseSerilog();
+            builder.Host.UseSerilog((context, config) =>
+            {
+                config.MinimumLevel.Override("Microsoft", LogEventLevel.Information);
+                config.MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", LogEventLevel.Warning);
+                config.Enrich.FromLogContext();
+                config.WriteTo.Console();
+                config.WriteTo.Seq("http://host.docker.internal:5001");
+            });
 
             // Add services to the container.
             builder.Services.AddRazorPages();

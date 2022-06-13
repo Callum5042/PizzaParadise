@@ -38,7 +38,7 @@ services:
             - ACCEPT_EULA=Y
         ports:
             - "5000:80"
-            - "5341:5341"
+            - "5001:5341"
         networks:
             - localdev
         volumes:
