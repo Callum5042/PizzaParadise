@@ -43,6 +43,8 @@ namespace PizzaParadise.Blazor
             builder.Services.AddTransient<ProductCategoriesRepository>();
             builder.Services.AddTransient<ProductCreateAction>();
 
+            builder.Services.AddLocalization();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -61,6 +63,7 @@ namespace PizzaParadise.Blazor
 
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
+            app.UseRequestLocalization("en-GB");
 
             // Apply migrations
             using (var scope = app.Services.CreateScope())
