@@ -2,7 +2,6 @@
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using PizzaParadise.Entities;
-using Serilog;
 
 namespace PizzaParadise.Blazor.Data
 {
@@ -17,13 +16,13 @@ namespace PizzaParadise.Blazor.Data
 
     public class ListUserAction 
     {
-        private readonly PizzaParadiseContext _context;
+        private readonly IDbContextFactory<PizzaParadiseContext> _contextFactory;
         private readonly IMapper _mapper;
         private readonly ILogger<ListUserAction> _logger;
 
-        public ListUserAction(PizzaParadiseContext context, IMapper mapper, ILogger<ListUserAction> logger)
+        public ListUserAction(IDbContextFactory<PizzaParadiseContext> contextFactory, IMapper mapper, ILogger<ListUserAction> logger)
         {
-            _context = context;
+            _contextFactory = contextFactory;
             _mapper = mapper;
             _logger = logger;
         }
@@ -31,9 +30,9 @@ namespace PizzaParadise.Blazor.Data
         public async ValueTask<IReadOnlyList<UserModelList>> ExecuteAsync()
         {
             _logger.LogInformation("Action started {Action}", nameof(ListUserAction));
-            //Log.Logger.Information("Action started {Action} SeriLogger", nameof(ListUserAction));
 
-            var result = await _context.Users
+            using var context = _contextFactory.CreateDbContext();
+            var result = await context.Users
                 .ProjectToType<UserModelList>()
                 .ToListAsync();
 

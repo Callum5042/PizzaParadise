@@ -1,4 +1,4 @@
-﻿using MapsterMapper;
+﻿using Microsoft.EntityFrameworkCore;
 using PizzaParadise.Entities;
 using PizzaParadise.Entities.Models;
 using System.ComponentModel.DataAnnotations;
@@ -16,13 +16,11 @@ namespace PizzaParadise.Blazor.Data
 
     public class CreateUserAction
     {
-        private readonly PizzaParadiseContext _context;
-        private readonly IMapper _mapper;
+        private readonly IDbContextFactory<PizzaParadiseContext> _contextFactory;
 
-        public CreateUserAction(PizzaParadiseContext context, IMapper mapper)
+        public CreateUserAction(IDbContextFactory<PizzaParadiseContext> contextFactory)
         {
-            _context = context;
-            _mapper = mapper;
+            _contextFactory = contextFactory;
         }
 
         public async ValueTask ExecuteAsync(UserModel model)
@@ -37,6 +35,7 @@ namespace PizzaParadise.Blazor.Data
             //    .ProjectToType<UserDto>()
             //    .SingleAsync(x => x.FirstName == "Boom");
 
+            using var context = _contextFactory.CreateDbContext();
 
             var user = new User()
             {
@@ -44,8 +43,8 @@ namespace PizzaParadise.Blazor.Data
                 LastName = model.LastName
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
         }
     }
 }

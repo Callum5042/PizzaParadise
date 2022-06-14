@@ -2,7 +2,7 @@
 @page "/Order"
 @page "/Order/{Category}"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Order</PageTitle>
 
 <div class="d-flex flex-row justify-content-start mt-3">
 
@@ -15,7 +15,7 @@
         {
             <div class="card mb-3">
                 <div class="card-body">
-                    @product
+                    @product.Price?.ToString("c") - @product.Name
                 </div>
             </div>
         }
@@ -32,7 +32,15 @@
 </div>
 
 @code {
-    private IList<string> products = new List<string>();
+
+    private class ProductDetails
+    {
+        public string? Name { get; set; }
+
+        public decimal? Price { get; set; }
+    }
+
+    private IList<ProductDetails> products = new List<ProductDetails>();
 
     [Parameter]
     public string? Category { get; set; }
@@ -41,7 +49,11 @@
     {
         for (int i = 0; i < 100; i++)
         {
-            products.Add("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+            products.Add(new ProductDetails()
+            {
+                Name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                Price = 10m
+            });
         }
     }
 }
