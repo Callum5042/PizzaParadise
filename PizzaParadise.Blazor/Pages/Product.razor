@@ -1,0 +1,74 @@
+﻿@page "/products"
+@using PizzaParadise.Blazor.Data
+@inject ProductCategoriesRepository ProductCategoriesRepository
+@inject ProductCreateAction ProductCreateAction
+
+<EditForm Model="@ProductCategoryModel" OnSubmit="@SubmitProductFormAsync">
+    <div class="card">
+
+        <h5 class="card-header">
+            Product Details
+        </h5>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="form-group col-md-4">
+
+                    <label>Name</label>
+                    <InputText @bind-Value="ProductCategoryModel.Name" class="form-control"></InputText>
+
+                </div>
+
+                <div class="form-group col-md-4">
+
+                    <label>Price</label>
+                    <InputNumber @bind-Value="ProductCategoryModel.Price" class="form-control"></InputNumber>
+
+                </div>
+
+                <div class="form-group col-md-4">
+
+                    <label>Product Category</label>
+                    <InputSelect @bind-Value="ProductCategoryModel.ProductCategoryId" class="form-control">
+                        <option value=""></option>
+                        @foreach (var category in ProductCategories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </InputSelect>
+
+                </div>
+
+                <div class="form-group col-md-12">
+
+                    <label>Description</label>
+                    <InputTextArea @bind-Value="ProductCategoryModel.Description" class="form-control"></InputTextArea>
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Add Product</button>
+
+        </div>
+
+    </div>
+</EditForm>
+
+@code {
+    private ProductCreateActionModel ProductCategoryModel { get; set; } = new ProductCreateActionModel();
+
+    private IList<ProductCategoryModel> ProductCategories { get; set; } = new List<ProductCategoryModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProductCategories = await ProductCategoriesRepository.GetAllAsync();
+    }
+
+    private async Task SubmitProductFormAsync()
+    {
+        await ProductCreateAction.ExecuteAsync(ProductCategoryModel);
+    }
+}

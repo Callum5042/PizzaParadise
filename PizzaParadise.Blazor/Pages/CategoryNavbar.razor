@@ -1,4 +1,7 @@
-﻿
+﻿@using Microsoft.EntityFrameworkCore
+@using PizzaParadise.Entities
+@inject IDbContextFactory<PizzaParadiseContext> DbContextFactory
+
 <ul class="list-group">
     @foreach (var category in categories)
     {
@@ -9,15 +12,12 @@
 @code {
     private IEnumerable<string> categories = new List<string>();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        categories = new List<string>()
-        {
-            "Starters",
-            "Pizzas",
-            "Sides",
-            "Desserts",
-            "Drinks",
-        };
+        using var context = DbContextFactory.CreateDbContext();
+
+        categories = await context.ProductCategories
+            .Select(x => x.Name)
+            .ToListAsync();
     }
 }

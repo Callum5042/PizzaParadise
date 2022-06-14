@@ -40,6 +40,8 @@ namespace PizzaParadise.Blazor
             builder.Services.AddScoped<IMapper, ServiceMapper>();
             builder.Services.AddTransient<CreateUserAction>();
             builder.Services.AddTransient<ListUserAction>();
+            builder.Services.AddTransient<ProductCategoriesRepository>();
+            builder.Services.AddTransient<ProductCreateAction>();
 
             var app = builder.Build();
 
