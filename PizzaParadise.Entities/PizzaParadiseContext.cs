@@ -12,6 +12,12 @@ namespace PizzaParadise.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PizzaParadiseContext).Assembly);
+
+            // Seed product categories
+            var productCategoriesData = new List<ProductCategory>();
+            productCategoriesData.Add(new ProductCategory("Pizza") { Id = 1 });
+
+            modelBuilder.Entity<ProductCategory>().HasData(productCategoriesData);
         }
 
         public DbSet<Pizza> Pizzas => Set<Pizza>();

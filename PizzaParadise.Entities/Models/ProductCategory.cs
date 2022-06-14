@@ -10,9 +10,11 @@ namespace PizzaParadise.Entities.Models
             Name = name;
         }
 
-        public int Id { get; protected set; }
+        public int? Id { get; set; }
 
         public string Name { get; protected set; }
+
+        public ICollection<Product> Products { get; set; } = new List<Product>();
 
         protected class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCategory>
         {
