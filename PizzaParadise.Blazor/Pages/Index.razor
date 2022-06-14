@@ -18,7 +18,7 @@
         {
             foreach (var product in products)
             {
-                <div class="card mb-3">
+                <div class="card mb-3" @onclick="(() => AddToBasket(product.Price.GetValueOrDefault()))">
                     <div class="card-body">
                         @product.Price?.ToString("c") - @product.Name
                     </div>
@@ -37,6 +37,7 @@
         <div class="card">
             <div class="card-body">
                 Basket
+                @CheckoutTotal.ToString("c")
             </div>
         </div>
     </div>
@@ -53,6 +54,8 @@
     }
 
     private IList<ProductDetails> products = new List<ProductDetails>();
+
+    public decimal CheckoutTotal { get; set; }
 
     [Parameter]
     public string? Category { get; set; }
@@ -71,5 +74,10 @@
                 Price = x.Price
             })
             .ToListAsync();
+    }
+
+    private void AddToBasket(decimal price)
+    {
+        CheckoutTotal += price;
     }
 }

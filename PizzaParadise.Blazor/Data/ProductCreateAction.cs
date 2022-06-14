@@ -10,7 +10,7 @@ namespace PizzaParadise.Blazor.Data
 
         public string? Description { get; set; }
 
-        public decimal? Price { get; set; }
+        public string? Price { get; set; }
 
         public int? ProductCategoryId { get; set; }
     }
@@ -29,7 +29,7 @@ namespace PizzaParadise.Blazor.Data
             using var context = _contextFactory.CreateDbContext();
             
             var category = await context.ProductCategories.FindAsync(model.ProductCategoryId);
-            context.Products.Add(new Product(model.Name, model.Price.GetValueOrDefault(), category)
+            context.Products.Add(new Product(model.Name, decimal.Parse(model.Price), category)
             {
                 Description = model.Description
             });

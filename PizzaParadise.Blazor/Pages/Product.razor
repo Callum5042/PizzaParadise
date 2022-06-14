@@ -3,6 +3,10 @@
 @inject ProductCategoriesRepository ProductCategoriesRepository
 @inject ProductCreateAction ProductCreateAction
 
+<div class="alert alert-success" hidden="@HideSuccessAlert">
+    <strong>Product</strong> has been successfully added.
+</div>
+
 <EditForm Model="@ProductCategoryModel" OnSubmit="@SubmitProductFormAsync">
     <div class="card">
 
@@ -24,7 +28,7 @@
                 <div class="form-group col-md-4">
 
                     <label>Price</label>
-                    <InputNumber @bind-Value="ProductCategoryModel.Price" class="form-control"></InputNumber>
+                    <InputText @bind-Value="ProductCategoryModel.Price" class="form-control"></InputText>
 
                 </div>
 
@@ -62,6 +66,8 @@
 
     private IList<ProductCategoryModel> ProductCategories { get; set; } = new List<ProductCategoryModel>();
 
+    private bool HideSuccessAlert { get; set; } = true;
+
     protected override async Task OnInitializedAsync()
     {
         ProductCategories = await ProductCategoriesRepository.GetAllAsync();
@@ -70,5 +76,6 @@
     private async Task SubmitProductFormAsync()
     {
         await ProductCreateAction.ExecuteAsync(ProductCategoryModel);
+        HideSuccessAlert = false;
     }
 }
