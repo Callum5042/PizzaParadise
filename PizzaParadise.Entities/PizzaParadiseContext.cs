@@ -17,5 +17,7 @@ namespace PizzaParadise.Entities
         public DbSet<Pizza> Pizzas => Set<Pizza>();
 
         public DbSet<User> Users => Set<User>();
+
+        public DbSet<ProductCategory> ProductCategories => Set<ProductCategory>();
     }
 }
