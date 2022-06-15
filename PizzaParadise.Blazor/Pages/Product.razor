@@ -4,7 +4,7 @@
 @inject ProductCreateAction ProductCreateAction
 
 <div class="alert alert-success" hidden="@HideSuccessAlert">
-    <strong>Product</strong> has been successfully added.
+    <strong>@ProductSuccessName</strong> has been successfully added.
 </div>
 
 <EditForm Model="@ProductCategoryModel" OnSubmit="@SubmitProductFormAsync">
@@ -68,6 +68,8 @@
 
     private bool HideSuccessAlert { get; set; } = true;
 
+    private string? ProductSuccessName { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         ProductCategories = await ProductCategoriesRepository.GetAllAsync();
@@ -77,5 +79,6 @@
     {
         await ProductCreateAction.ExecuteAsync(ProductCategoryModel);
         HideSuccessAlert = false;
+        ProductSuccessName = ProductCategoryModel.Name;
     }
 }
