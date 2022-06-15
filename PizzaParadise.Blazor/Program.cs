@@ -32,7 +32,7 @@ namespace PizzaParadise.Blazor
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddDbContextFactory<PizzaParadiseContext>(opt =>
             {
-                opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("PizzaParadise.Entities"));
+                opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("PizzaParadise.Migrations"));
             });
 
             builder.Services.AddSingleton(new TypeAdapterConfig());

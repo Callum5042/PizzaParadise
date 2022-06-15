@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaParadise.Entities;
 
 #nullable disable
 
-namespace PizzaParadise.Entities.Migrations
+namespace PizzaParadise.Blazor.Migrations
 {
     [DbContext(typeof(PizzaParadiseContext))]
-    partial class PizzaParadiseContextModelSnapshot : ModelSnapshot
+    [Migration("20220615074624_MoreSeedData")]
+    partial class MoreSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,40 @@ namespace PizzaParadise.Entities.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("PizzaParadise.Entities.Models.Pizza", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("BOSS_ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnName("ACTIVE");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("DESCRIPTION");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("NAME");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(19, 4)
+                        .HasColumnType("decimal(19,4)")
+                        .HasColumnName("PRICE");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PIZZAS", (string)null);
+                });
 
             modelBuilder.Entity("PizzaParadise.Entities.Models.Product", b =>
                 {
@@ -82,27 +118,27 @@ namespace PizzaParadise.Entities.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 2,
                             Name = "Starters"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
                             Name = "Pizza"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 4,
                             Name = "Sides"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 5,
                             Name = "Drinks"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 6,
                             Name = "Desserts"
                         });
                 });
