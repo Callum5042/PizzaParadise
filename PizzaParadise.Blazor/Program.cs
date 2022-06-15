@@ -21,9 +21,8 @@ namespace PizzaParadise.Blazor
             {
                 config.MinimumLevel.Override("Microsoft", LogEventLevel.Information);
                 config.MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", LogEventLevel.Warning);
+                config.ReadFrom.Configuration(builder.Configuration);
                 config.Enrich.FromLogContext();
-                config.WriteTo.Console();
-                config.WriteTo.Seq("http://host.docker.internal:5001");
             });
 
             builder.Services.AddRazorPages();
@@ -56,9 +55,7 @@ namespace PizzaParadise.Blazor
             }
 
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.MapBlazorHub();
