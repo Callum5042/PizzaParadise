@@ -7,6 +7,7 @@ PizzaParadise is a project used for experimenting with web technologies.
 * Entity Framework Core
 * Docker
 * MS-SQL
+* Seq
 
 # Database Migrations
 To add a new migration run the command
