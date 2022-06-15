@@ -9,11 +9,11 @@ using PizzaParadise.Entities;
 
 #nullable disable
 
-namespace PizzaParadise.Blazor.Migrations
+namespace PizzaParadise.Entities.Migrations
 {
     [DbContext(typeof(PizzaParadiseContext))]
-    [Migration("20220614153124_AddProductTable")]
-    partial class AddProductTable
+    [Migration("20220615090552_InitialDatabase")]
+    partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,40 +23,6 @@ namespace PizzaParadise.Blazor.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("PizzaParadise.Entities.Models.Pizza", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("BOSS_ID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit")
-                        .HasColumnName("ACTIVE");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("DESCRIPTION");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("NAME");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(19, 4)
-                        .HasColumnType("decimal(19,4)")
-                        .HasColumnName("PRICE");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PIZZAS", (string)null);
-                });
 
             modelBuilder.Entity("PizzaParadise.Entities.Models.Product", b =>
                 {
@@ -114,13 +80,6 @@ namespace PizzaParadise.Blazor.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PRODUCT_CATEGORIES", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Pizza"
-                        });
                 });
 
             modelBuilder.Entity("PizzaParadise.Entities.Models.User", b =>

@@ -17,7 +17,7 @@ services:
         networks:
             - localdev
         environment:
-            ConnectionStrings__PizzaParadiseDb: "Server=host.docker.internal,1400;Database=PizzaParadiseDb;User=sa;Password=password123"
+            ConnectionStrings__PizzaParadiseDb: "Server=host.docker.internal,1400;Database=PizzaParadiseDb;User=sa;Password=Password@123"
             SeqUri: "http://host.docker.internal:5001"
             Serilog__WriteTo__1__Args__serverUrl: "http://host.docker.internal:5001"
 
@@ -26,7 +26,7 @@ services:
         container_name: dbserver
         environment:
             - ACCEPT_EULA=Y
-            - MSSQL_SA_PASSWORD=password123
+            - MSSQL_SA_PASSWORD=Password@123
             - MSSQL_TCP_PORT=1433
         ports:
             - "1400:1433"

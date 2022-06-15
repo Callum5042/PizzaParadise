@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Blazor", "Piz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Entities", "PizzaParadise.Entities\PizzaParadise.Entities.csproj", "{DEB62F49-CA47-47F0-934B-67D739906132}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Migrations", "PizzaParadise.Migrations\PizzaParadise.Migrations.csproj", "{03742240-0891-42C5-8E78-70000E3B2D43}"
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{112CF519-9A6F-49AE-96F8-0DEB25699D4A}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{DEB62F49-CA47-47F0-934B-67D739906132}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEB62F49-CA47-47F0-934B-67D739906132}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEB62F49-CA47-47F0-934B-67D739906132}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03742240-0891-42C5-8E78-70000E3B2D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03742240-0891-42C5-8E78-70000E3B2D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03742240-0891-42C5-8E78-70000E3B2D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03742240-0891-42C5-8E78-70000E3B2D43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{112CF519-9A6F-49AE-96F8-0DEB25699D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{112CF519-9A6F-49AE-96F8-0DEB25699D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{112CF519-9A6F-49AE-96F8-0DEB25699D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU

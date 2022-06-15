@@ -14,19 +14,17 @@ namespace PizzaParadise.Entities
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PizzaParadiseContext).Assembly);
 
             // Seed product categories
-            var productCategoriesData = new List<ProductCategory>
-            {
-                new ProductCategory("Starters") { Id = 2 },
-                new ProductCategory("Pizza") { Id = 3 },
-                new ProductCategory("Sides") { Id = 4 },
-                new ProductCategory("Drinks") { Id = 5 },
-                new ProductCategory("Desserts") { Id = 6 }
-            };
+            //var productCategoriesData = new List<ProductCategory>
+            //{
+            //    new ProductCategory("Starters") { Id = 2 },
+            //    new ProductCategory("Pizza") { Id = 3 },
+            //    new ProductCategory("Sides") { Id = 4 },
+            //    new ProductCategory("Drinks") { Id = 5 },
+            //    new ProductCategory("Desserts") { Id = 6 }
+            //};
 
-            modelBuilder.Entity<ProductCategory>().HasData(productCategoriesData);
+            //modelBuilder.Entity<ProductCategory>().HasData(productCategoriesData);
         }
-
-        public DbSet<Pizza> Pizzas => Set<Pizza>();
 
         public DbSet<User> Users => Set<User>();
 
