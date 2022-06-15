@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PizzaParadise.Entities\PizzaParadise.Entities.csproj" />
-    <ProjectReference Include="..\PizzaParadise.Migrations\PizzaParadise.Migrations.csproj" />
   </ItemGroup>
 
 </Project>

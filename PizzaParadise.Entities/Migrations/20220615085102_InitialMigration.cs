@@ -2,12 +2,40 @@
 
 #nullable disable
 
-namespace PizzaParadise.Blazor.Migrations
+namespace PizzaParadise.Entities.Migrations
 {
-    public partial class AddProductTable : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "PRODUCT_CATEGORIES",
+                columns: table => new
+                {
+                    PRODUCT_CATEGORY_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NAME = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PRODUCT_CATEGORIES", x => x.PRODUCT_CATEGORY_ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "USER",
+                columns: table => new
+                {
+                    USER_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FIRSTNAME = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+                    LASTNAME = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+                    EMAILADDRESS = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_USER", x => x.USER_ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "PRODUCTS",
                 columns: table => new
@@ -33,7 +61,14 @@ namespace PizzaParadise.Blazor.Migrations
             migrationBuilder.InsertData(
                 table: "PRODUCT_CATEGORIES",
                 columns: new[] { "PRODUCT_CATEGORY_ID", "NAME" },
-                values: new object[] { 1, "Pizza" });
+                values: new object[,]
+                {
+                    { 1, "Starters" },
+                    { 2, "Pizza" },
+                    { 3, "Sides" },
+                    { 4, "Drinks" },
+                    { 5, "Desserts" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PRODUCTS_ProductCategoryId",
@@ -46,10 +81,11 @@ namespace PizzaParadise.Blazor.Migrations
             migrationBuilder.DropTable(
                 name: "PRODUCTS");
 
-            migrationBuilder.DeleteData(
-                table: "PRODUCT_CATEGORIES",
-                keyColumn: "PRODUCT_CATEGORY_ID",
-                keyValue: 1);
+            migrationBuilder.DropTable(
+                name: "USER");
+
+            migrationBuilder.DropTable(
+                name: "PRODUCT_CATEGORIES");
         }
     }
 }
