@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PizzaParadise.Entities;
 using Serilog;
@@ -31,7 +32,15 @@ namespace PizzaParadise.Web
                 opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("PizzaParadise.Entities"));
             });
 
+            // Authenitcation
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = new PathString("/login");
+                });
+
             // Dependency injection
+            builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
             var app = builder.Build();
 
@@ -52,6 +61,10 @@ namespace PizzaParadise.Web
 
             app.MapRazorPages();
             app.MapBlazorHub();
+
+            app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseCookiePolicy();
 
             app.Run();
         }
