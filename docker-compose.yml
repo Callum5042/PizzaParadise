@@ -5,7 +5,7 @@ networks:
         name: localdev
 
 services:
-    pizzaparadise.blazor:
+    pizzaparadiseweb:
         image: ${DOCKER_REGISTRY-}pizzaparadiseweb
         build:
             context: .
