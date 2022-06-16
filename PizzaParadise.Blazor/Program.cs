@@ -62,6 +62,12 @@ namespace PizzaParadise.Blazor
             app.MapFallbackToPage("/_Host");
             app.UseRequestLocalization("en-GB");
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=home}/{action=index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=home}/{action=index}/{id?}");
+            });
+
             // Apply migrations
             using (var scope = app.Services.CreateScope())
             {
