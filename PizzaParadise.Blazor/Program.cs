@@ -1,5 +1,6 @@
 using Mapster;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PizzaParadise.Blazor.Data;
 using PizzaParadise.Data;
@@ -35,6 +36,13 @@ namespace PizzaParadise.Blazor
                 opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("PizzaParadise.Entities"));
             });
 
+            // Authentication
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = new PathString("/accounts/login");
+                });
+
             builder.Services.AddSingleton(new TypeAdapterConfig());
             builder.Services.AddScoped<IMapper, ServiceMapper>();
             builder.Services.AddTransient<CreateUserAction>();
@@ -61,6 +69,10 @@ namespace PizzaParadise.Blazor
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
             app.UseRequestLocalization("en-GB");
+
+            app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {

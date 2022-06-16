@@ -4,6 +4,15 @@
     Layout = "~/controllers/_Layout.cshtml";
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <strong>Is authenitcated</strong>
+}
+else
+{
+    <strong>Is not authenitcated</strong>
+}
+
 <form asp-controller="accounts" asp-action="login" method="post">
 
     <div class="d-flex flex-row justify-content-center mt-3">
