@@ -1,0 +1,16 @@
+﻿@using PizzaParadise.Mvc.Site.Accounts
+@model LoginModel
+
+<h1>Login</h1>
+
+<form asp-controller="accounts" asp-action="login">
+
+    <label asp-for="EmailAddress"></label>
+    <input asp-for="EmailAddress" />
+    
+    <label asp-for="Password"></label>
+    <input asp-for="Password" />
+
+    <button type="submit">Login</button>
+
+</form>
