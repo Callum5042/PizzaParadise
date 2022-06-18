@@ -7,7 +7,7 @@ namespace PizzaParadise.Mvc.Site.Accounts
         public IActionResult Login()
         {
             var model = new LoginModel();
-            return View("~/site/accounts/login.cshtml", model);
+            return View(model);
         }
     }
 }
