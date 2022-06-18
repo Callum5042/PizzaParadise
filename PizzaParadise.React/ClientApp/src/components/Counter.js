@@ -11,14 +11,14 @@ export class Counter extends Component {
 
   incrementCounter() {
     this.setState({
-      currentCount: this.state.currentCount + 1
+      currentCount: this.state.currentCount + 10
     });
   }
 
   render() {
     return (
       <div>
-        <h1>Counter</h1>
+        <h1>Counter 123</h1>
 
         <p>This is a simple example of a React component.</p>
 
