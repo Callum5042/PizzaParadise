@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.React", "PizzaParadise.React\PizzaParadise.React.csproj", "{15B24565-6A7D-4EDA-9994-E6B4805BE467}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaParadise.Mvc", "PizzaParadise.Mvc\PizzaParadise.Mvc.csproj", "{B48CC151-10E4-4CF5-9F5D-32E1850C3389}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{15B24565-6A7D-4EDA-9994-E6B4805BE467}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15B24565-6A7D-4EDA-9994-E6B4805BE467}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15B24565-6A7D-4EDA-9994-E6B4805BE467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B48CC151-10E4-4CF5-9F5D-32E1850C3389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B48CC151-10E4-4CF5-9F5D-32E1850C3389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B48CC151-10E4-4CF5-9F5D-32E1850C3389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B48CC151-10E4-4CF5-9F5D-32E1850C3389}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
