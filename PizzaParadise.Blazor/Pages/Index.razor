@@ -2,6 +2,7 @@
 @page "/Order"
 @page "/Order/{Category}"
 @using Microsoft.EntityFrameworkCore
+@using PizzaParadise.Blazor.Data
 @using PizzaParadise.Entities
 @inject IDbContextFactory<PizzaParadiseContext> DbContextFactory
 
@@ -27,7 +28,7 @@
         {
             foreach (var product in products)
             {
-                <div class="card mb-3" @onclick="(() => AddToBasket(product.Price.GetValueOrDefault()))">
+                <div class="card mb-3" @onclick="(() => AddToBasket(0, product.Name!, product.Price.GetValueOrDefault()))">
                     <div class="card-body">
                         @product.Price?.ToString("c") - @product.Name
                     </div>
@@ -44,9 +45,20 @@
 
     <div class="sticky">
         <div class="card">
-            <div class="card-body">
+            <h5 class="card-header">
                 Basket
-                @CheckoutTotal.ToString("c")
+            </h5>
+            <div class="card-body">
+                @foreach (var item in Items)
+                {
+                    <p>
+                        @item.ProductName - @item.Price?.ToString("c")
+                    </p>
+                }
+                Total: @Items.Sum(x => x.Price)?.ToString("c")
+
+                <br />
+                <button type="button" class="btn btn-outline-primary" @onclick="(() => CheckoutBasket())">Checkout</button>
             </div>
         </div>
     </div>
@@ -63,6 +75,8 @@
     }
 
     private IList<ProductDetails> products = new List<ProductDetails>();
+
+    private IList<Basket> Items = new List<Basket>();
 
     public decimal CheckoutTotal { get; set; }
 
@@ -85,8 +99,17 @@
             .ToListAsync();
     }
 
-    private void AddToBasket(decimal price)
+    private void AddToBasket(int id, string name, decimal price)
     {
-        CheckoutTotal += price;
+        Items.Add(new Basket()
+        {
+            ProductName = name,
+            Price = price
+        });
+    }
+
+    private void CheckoutBasket()
+    {
+        
     }
 }
