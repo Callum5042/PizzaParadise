@@ -1,7 +1,9 @@
 using Mapster;
 using MapsterMapper;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using PizzaParadise.Blazor.Contracts;
 using PizzaParadise.Blazor.Data;
 using PizzaParadise.Data;
 using PizzaParadise.Entities;
@@ -10,6 +12,14 @@ using Serilog.Events;
 
 namespace PizzaParadise.Blazor
 {
+    public class EmailConsumer : IConsumer<EmailContract>
+    {
+        public Task Consume(ConsumeContext<EmailContract> context)
+        {
+            return Task.CompletedTask;
+        }
+    }
+
     public class Program
     {
         public static void Main(string[] args)
@@ -42,6 +52,23 @@ namespace PizzaParadise.Blazor
                 {
                     options.LoginPath = new PathString("/accounts/login");
                 });
+
+            // Add MassTransit
+            builder.Services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((context, config) =>
+                {
+                    config.Host("host.docker.internal", "/", h => 
+                    {
+                        h.Username("admin");
+                        h.Password("password123");
+                    });
+
+                    config.ConfigureEndpoints(context);
+                });
+
+                x.AddConsumer<EmailConsumer>();
+            });
 
             builder.Services.AddSingleton(new TypeAdapterConfig());
             builder.Services.AddScoped<IMapper, ServiceMapper>();

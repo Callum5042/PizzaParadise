@@ -1,10 +1,13 @@
 ﻿@page "/"
 @page "/Order"
 @page "/Order/{Category}"
+@using MassTransit
 @using Microsoft.EntityFrameworkCore
+@using PizzaParadise.Blazor.Contracts
 @using PizzaParadise.Blazor.Data
 @using PizzaParadise.Entities
 @inject IDbContextFactory<PizzaParadiseContext> DbContextFactory
+@inject IBusControl BusControl
 
 <PageTitle>Order</PageTitle>
 
@@ -17,11 +20,14 @@
     </NotAuthorized>
 </AuthorizeView>
 
+<button type="button" class="btn btn-outline-primary" @onclick="(() => SendEmailAsync())">Send Email</button>
+
 <div class="d-flex flex-row justify-content-start">
 
     <div class="categories-container sticky">
         <CategoryNavbar />
     </div>
+
 
     <div class="flex-grow-1 ms-3 me-3">
         @if (products.Any())
@@ -110,6 +116,14 @@
 
     private void CheckoutBasket()
     {
-        
+
+    }
+
+    private async Task SendEmailAsync()
+    {
+        await BusControl.Publish(new EmailContract()
+        {
+            EmailBody = "Test email"
+        });
     }
 }
